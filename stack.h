@@ -24,6 +24,7 @@ typedef struct s_stack
 {
 	int		*arr;
 	int		size;
+	int		count;
 	int		top;
 	int		bot;
 } t_stack;
