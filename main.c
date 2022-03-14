@@ -11,35 +11,40 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "command.h"
 #include "stack.h"
-#include "ft_atoi.c"
+#include "util.c"
+#include "split.h"
 
 int	main(int ac, char **av)
 {
 	int		i;
-	t_stack	*pa;
+	int 	count;
+	char	**list;
+	char	***args;
+	t_stack *pa;
 	t_stack *pb;
 
-	pa = create_stack(ac - 1);
-	pb = create_stack(ac - 1);
-	i = ac - 1;
-	while (i > 0)
+	args = malloc(sizeof *args * (ac - 1));
+	if (args == NULL)
+		error_exit();
+	i = 1;
+	while (i < ac)
+		args[i - 1] = ft_split(av[i], ' ');
+	i = 0;
+	count = 0;
+	while (i < ac - 1)
 	{
-		push(pa, TOP, ft_atoi(av[i]));
-		i--;
+		list = args[i];
+		while (*list)
+		{
+			count++;
+			list++;
+		}
 	}
-	
-	command(PB, pa, pb);
-	command(PB, pa, pb);
-	command(SS, pa, pb);
-	command(RRA, pa, pb);
-	command(RB, pa, pb);
+	pa = create_stack(count);
+	pb = create_stack(count);
 
-	while (is_empty(pa) != 1)
-		printf("%d\n", pop(pa, TOP));
-	printf("=====PB====\n");
-	while (is_empty(pb) != 1)
-		printf("%d\n", pop(pb, TOP));
 	return (0);
 }
