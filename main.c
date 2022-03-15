@@ -45,6 +45,27 @@ int	main(int ac, char **av)
 	}
 	pa = create_stack(count);
 	pb = create_stack(count);
-
+	i = 0;
+	count = 0;
+	while (i < ac - 1)
+	{
+		list = args[i];
+		while (*list)
+		{
+			int flag = 1;
+			push(pa, TOP, atoi_with_check(list, &flag));
+			free(list);
+			list++;
+			if (flag == 0)
+			{
+				while (*list)
+					free(list);
+				while (i < ac - 1)
+					// 구현해야 할 함수
+					free_double(args[i++]);
+				free(args);
+			}
+		}
+	}
 	return (0);
 }

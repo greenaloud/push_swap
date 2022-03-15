@@ -20,7 +20,7 @@ void	error_exit()
 	exit(EXIT_SUCCESS);
 }
 
-int	atoi_with_check(const char *str);
+int	atoi_with_check(const char *str, int *flag);
 {
 	int		sign;
 	long	result;
@@ -41,10 +41,10 @@ int	atoi_with_check(const char *str);
 		prev = result;
 		result = result * 10 + *str - '0';
 		if (prev != result / 10)
-			error_exit();
+			*flag = 0;
 		str++;
 	}
 	if (str)
-		error_exit();
+		*flag = 0;
 	return (sign * result);
 }
