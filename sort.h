@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split.h                                            :+:      :+:    :+:   */
+/*   sort.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wocho <wocho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 00:57:57 by wocho             #+#    #+#             */
+/*   Created: 2022/03/16 00:57:55 by wocho             #+#    #+#             */
 /*   Updated: 2022/03/16 00:58:12 by wocho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SPLIT_H
-# define SPLIT_H
+#ifndef SORT_H
+# define SORT_H
 
-char	**ft_split(char const *s, char c);
+void	quick_sort(int *arr, int s, int e);
 
 #endif
