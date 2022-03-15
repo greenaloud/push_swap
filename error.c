@@ -1,4 +1,5 @@
 #include "error.h"
+#include "stack.h"
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -45,6 +46,7 @@ void	free_triple(char ***list)
 	while (list[i])
 	{
 		free_double(list[i]);
+		i++;
 	}
 	free(list);
 }

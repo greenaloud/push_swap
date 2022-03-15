@@ -1,6 +1,8 @@
 #ifndef ERROR_H
 # define ERROR_H
 
+# include "stack.h"
+
 void	error_exit(void);
 void	free_double(char **ptr);
 int		check_duplicate(t_stack *pa, int data);

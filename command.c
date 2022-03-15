@@ -10,23 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "command.h"
 
-static char	*p(t_stack *pa, t_stack *pb, int flag)
+static void	p(t_stack *pa, t_stack *pb, int flag)
 {
 	if (flag == A)
 	{
 		push(pa, TOP, pop(pb, TOP));
-		return ("pa\n");
+		write(STDOUT_FILENO, "pa\n", 3);
 	}
 	else
 	{
 		push(pb, TOP, pop(pa, TOP));
-		return ("pb\n");
+		write(STDOUT_FILENO, "pb\n", 3);
 	}
 }
 
-static char	*s(t_stack *pa, t_stack *pb, int flag)
+static void	s(t_stack *pa, t_stack *pb, int flag)
 {
 	int	temp;
 
@@ -36,7 +37,7 @@ static char	*s(t_stack *pa, t_stack *pb, int flag)
 		temp = pop(pa, TOP);
 		push(pa, TOP, pop(pa, BOTTOM));
 		push(pa, TOP, temp);
-		return ("sa\n");
+		write(STDOUT_FILENO, "sa\n", 3);
 	}
 	else if (flag == B)
 	{
@@ -44,78 +45,78 @@ static char	*s(t_stack *pa, t_stack *pb, int flag)
 		temp = pop(pb, TOP);
 		push(pb, TOP, pop(pb, BOTTOM));
 		push(pb, TOP, temp);
-		return ("sb\n");
+		write(STDOUT_FILENO, "sb\n", 3);
 	}
 	else
 	{
 		s(pa, pb, A);
 		s(pa, pb, B);
-		return ("ss\n");
+		write(STDOUT_FILENO, "ss\n", 3);
 	}
 }
 
-static char	*r(t_stack *pa, t_stack *pb, int flag)
+static void	r(t_stack *pa, t_stack *pb, int flag)
 {
 	if (flag == A)
 	{
 		push(pa, BOTTOM, pop(pa, TOP));
-		return ("ra\n");
+		write(STDOUT_FILENO, "ra\n", 3);
 	}
 	else if (flag == B)
 	{
 		push(pb, BOTTOM, pop(pb, TOP));
-		return ("rb\n");
+		write(STDOUT_FILENO, "rb\n", 3);
 	}
 	else
 	{
 		push(pa, BOTTOM, pop(pa, TOP));
 		push(pb, BOTTOM, pop(pb, TOP));
-		return ("rr\n");
+		write(STDOUT_FILENO, "rr\n", 3);
 	}
 }
 
-static char	*rr(t_stack *pa, t_stack *pb, int flag)
+static void	rr(t_stack *pa, t_stack *pb, int flag)
 {
 	if (flag == A)
 	{
 		push(pa, TOP, pop(pa, BOTTOM));
-		return ("rra\n");
+		write(STDOUT_FILENO, "rra\n", 4);
 	}
 	else if (flag == B)
 	{
 		push(pb, TOP, pop(pb, BOTTOM));
-		return ("rrb\n");
+		write(STDOUT_FILENO, "rrb\n", 4);
 	}
 	else
 	{
 		push(pa, TOP, pop(pa, BOTTOM));
 		push(pb, TOP, pop(pb, BOTTOM));
-		return ("rrr\n");
+		write(STDOUT_FILENO, "rrr\n", 4);
 	}
 }
 
-char	*command(int com, t_stack *pa, t_stack *pb)
+void	command(int com, t_stack *pa, t_stack *pb)
 {
 	if (com == PA)
-		return (p(pa, pb, A));
+		(p(pa, pb, A));
 	else if (com == PB)
-		return (p(pa, pb, B));
+		(p(pa, pb, B));
 	else if (com == SA)
-		return (s(pa, pb, A));
+		(s(pa, pb, A));
 	else if (com == SB)
-		return (s(pa, pb, B));
+		(s(pa, pb, B));
 	else if (com == SS)
-		return (s(pa, pb, ALL));
+		(s(pa, pb, ALL));
 	else if (com == RA)
-		return (r(pa, pb, A));
+		(r(pa, pb, A));
 	else if (com == RB)
-		return (r(pa, pb, B));
+		(r(pa, pb, B));
 	else if (com == RR)
-		return (r(pa, pb, ALL));
+		(r(pa, pb, ALL));
 	else if (com == RRA)
-		return (rr(pa, pb, A));
+		(rr(pa, pb, A));
 	else if (com == RRB)
-		return (rr(pa, pb, B));
+		(rr(pa, pb, B));
 	else
-		return (rr(pa, pb, ALL));
+		(rr(pa, pb, ALL));
 }

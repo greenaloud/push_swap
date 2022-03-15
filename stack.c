@@ -39,11 +39,13 @@ void	push(t_stack *pstack, int pos, int data)
 	{
 		pstack->arr[pstack->top] = data;
 		pstack->top = (pstack->top - 1 + pstack->size) % (pstack->size);
+		(pstack->count)++;
 	}
 	else
 	{
 		pstack->bot = (pstack->bot + 1) % (pstack->size);
 		pstack->arr[pstack->bot] = data;
+		(pstack->count)++;
 	}
 }
 
@@ -54,12 +56,14 @@ int	pop(t_stack *pstack, int pos)
 	if (pos == TOP)
 	{
 		pstack->top = (pstack->top + 1) % (pstack->size);
+		(pstack->count)--;
 		return (pstack->arr[pstack->top]);
 	}
 	else
 	{
 		ret = pstack->arr[pstack->bot];
 		pstack->bot = (pstack->bot - 1 + pstack->size) % (pstack->size);
+		(pstack->count)--;
 		return (ret);
 	}
 }

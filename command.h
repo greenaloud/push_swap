@@ -31,6 +31,6 @@
 # define RRB	9
 # define RRR	10
 
-char	*command(int com, t_stack *pa, t_stack *pb);
+void	command(int com, t_stack *pa, t_stack *pb);
 
 #endif

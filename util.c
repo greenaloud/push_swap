@@ -51,7 +51,7 @@ char	***get_args_list(char **argv, int size)
 	return (list);
 }
 
-static int	check_and_push(t_stack *pa, char ***list)
+int	check_and_push(t_stack *pa, char ***list)
 {
 	int	i;
 	int	j;
@@ -68,7 +68,7 @@ static int	check_and_push(t_stack *pa, char ***list)
 			data = atoi_with_check(list[i][j], &flag);
 			if (!flag || !check_duplicate(pa, data))
 				return (0);
-			push(pa, TOP, data);
+			push(pa, BOTTOM, data);
 			j++;
 		}
 		i++;
