@@ -16,10 +16,12 @@ t_stack	*create_stack(int size)
 {
 	t_stack	*pstack;
 
+	if (size <= 0)
+		return (NULL);
 	pstack = malloc(sizeof (t_stack));
 	if (pstack == NULL)
 		return (NULL);
-	pstack->arr = malloc(sizeof (element) * (size + 1));
+	pstack->arr = malloc(sizeof (int) * (size + 1));
 	if (pstack->arr == NULL)
 	{
 		free(pstack);
@@ -47,7 +49,7 @@ void	push(t_stack *pstack, int pos, int data)
 
 int	pop(t_stack *pstack, int pos)
 {
-	int	 ret;
+	int	ret;
 
 	if (pos == TOP)
 	{

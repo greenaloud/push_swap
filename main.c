@@ -13,59 +13,44 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "command.h"
+#include "error.h"
 #include "stack.h"
-#include "util.c"
-#include "split.h"
+#include "util.h"
 
-int	main(int ac, char **av)
+static int	init_stacks(t_stack **pa, t_stack **pb, char ***list)
 {
-	int		i;
-	int 	count;
-	char	**list;
-	char	***args;
-	t_stack *pa;
-	t_stack *pb;
+	int	count;
 
-	args = malloc(sizeof *args * (ac - 1));
-	if (args == NULL)
-		error_exit();
-	i = 1;
-	while (i < ac)
-		args[i - 1] = ft_split(av[i], ' ');
-	i = 0;
-	count = 0;
-	while (i < ac - 1)
+	count = get_arg_count(list);
+	*pa = create_stack(count);
+	*pb = create_stack(count);
+	if (*pa == NULL || *pb == NULL)
+		return (0);
+	return (1);
+}
+
+int	main(int argc, char **argv)
+{
+	char	***list;
+	t_stack	*pa;
+	t_stack	*pb;
+
+	list = get_args_list(argv + 1, argc - 1);
+	if (!init_stacks(&pa, &pb, list))
+		free_and_exit(pa, pb, list);
+	if (!check_and_push(pa, list))
+		free_and_exit(pa, pb, list);
+	free_triple(list);
+	push_swap(pa, pb);
+
+	// 스택 확인용 코드
+	int idx = (pa->top + 1) % pa->size;
+	while (idx != pa->bot)
 	{
-		list = args[i];
-		while (*list)
-		{
-			count++;
-			list++;
-		}
+		printf("%d\n", pa->arr[idx]);
+		idx = (idx + 1) % (pa->size);
 	}
-	pa = create_stack(count);
-	pb = create_stack(count);
-	i = 0;
-	count = 0;
-	while (i < ac - 1)
-	{
-		list = args[i];
-		while (*list)
-		{
-			int flag = 1;
-			push(pa, TOP, atoi_with_check(list, &flag));
-			free(list);
-			list++;
-			if (flag == 0)
-			{
-				while (*list)
-					free(list);
-				while (i < ac - 1)
-					// 구현해야 할 함수
-					free_double(args[i++]);
-				free(args);
-			}
-		}
-	}
+	printf("%d\n", pa->arr[idx]);
+	// 주석 사이 코드 삭제할 것
 	return (0);
 }

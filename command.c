@@ -69,12 +69,12 @@ static char	*r(t_stack *pa, t_stack *pb, int flag)
 	else
 	{
 		push(pa, BOTTOM, pop(pa, TOP));
-		push(pb, BOTTOM, pop(pb, TOP));	
+		push(pb, BOTTOM, pop(pb, TOP));
 		return ("rr\n");
 	}
 }
 
-static char *rr(t_stack *pa, t_stack *pb, int flag)
+static char	*rr(t_stack *pa, t_stack *pb, int flag)
 {
 	if (flag == A)
 	{

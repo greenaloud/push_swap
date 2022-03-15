@@ -18,8 +18,6 @@
 # define TOP 	0
 # define BOTTOM 1
 
-typedef int	element;
-
 typedef struct s_stack
 {
 	int		*arr;
@@ -27,7 +25,7 @@ typedef struct s_stack
 	int		count;
 	int		top;
 	int		bot;
-} t_stack;
+}	t_stack;
 
 t_stack	*create_stack(int size);
 void	push(t_stack *pstack, int pos, int data);

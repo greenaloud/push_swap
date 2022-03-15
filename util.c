@@ -1,50 +1,106 @@
+#include "error.h"
 #include "util.h"
+#include "split.h"
+#include "stack.h"
 #include <stdlib.h>
-#include <unistd.h>
 
-static int strncmp(char *str1, char *str2, int n)
+int	get_arg_count(char ***list)
 {
-	int	idx;
+	int	i;
+	int	j;
+	int	count;
 
-	idx = 0;
-	if (n == 0)
-		return (0);
-	while (str1[idx] && str2[idx] && str1[idx] == str2[idx] && idx < n - 1)
-		idx++;
-	return (str1[idx] - str2[idx]);
+	count = 0;
+	i = 0;
+	while (list[i])
+	{
+		j = 0;
+		while (list[i][j])
+		{
+			count++;
+			j++;
+		}
+		i++;
+	}
+	return (count);
 }
 
-void	error_exit()
+char	***get_args_list(char **argv, int size)
 {
-	write(STDERR_FILENO, "Error\n", 6);
-	exit(EXIT_SUCCESS);
+	int		i;
+	char	***list;
+
+	list = malloc(sizeof (*list) * (size + 1));
+	if (list == NULL)
+		error_exit();
+	list[size] = NULL;
+	i = 0;
+	while (*argv)
+	{
+		list[i] = ft_split(*argv, ' ');
+		if (list[i] == NULL)
+		{
+			while (--i >= 0)
+				free_double(list[i]);
+			free(list);
+			error_exit();
+		}
+		i++;
+		argv++;
+	}
+	return (list);
 }
 
-int	atoi_with_check(const char *str, int *flag);
+static int	check_and_push(t_stack *pa, char ***list)
+{
+	int	i;
+	int	j;
+	int	data;
+	int	flag;
+
+	i = 0;
+	while (list[i])
+	{
+		j = 0;
+		while (list[i][j])
+		{
+			flag = 1;
+			data = atoi_with_check(list[i][j], &flag);
+			if (!flag || !check_duplicate(pa, data))
+				return (0);
+			push(pa, TOP, data);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	atoi_with_check(char *str, int *flag)
 {
 	int		sign;
+	int		digits;
 	long	result;
-	long	prev;
 
 	sign = 1;
 	result = 0;
-	if (strncmp(str, "-2147483648", 11) == 0)
-		return (INT_MIN);
+	digits = 0;
 	if (*str == '+' || *str == '-')
 	{
 		if (*str == '-')
 			sign *= -1;
 		str++;
 	}
+	while (*str == '0')
+		str++;
 	while ('0' <= *str && *str <= '9')
 	{
-		prev = result;
 		result = result * 10 + *str - '0';
-		if (prev != result / 10)
-			*flag = 0;
 		str++;
+		digits++;
 	}
-	if (str)
+	result *= sign;
+	if (*str || digits > 10 || result > INT_MAX || result < INT_MIN)
 		*flag = 0;
-	return (sign * result);
+	return ((int)result);
 }
