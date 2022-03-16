@@ -16,6 +16,24 @@
 #include "stack.h"
 #include <stdlib.h>
 
+int	check_duplicate(t_stack *pa, int data)
+{
+	int	front;
+
+	if (pa->count == 0)
+		return (1);
+	front = (pa->top + 1) % pa->size;
+	while (front != pa->bot)
+	{
+		if (pa->arr[front] == data)
+			return (0);
+		front = (front + 1) % pa->size;
+	}
+	if (pa->arr[front] == data)
+		return (0);
+	return (1);
+}
+
 int	get_arg_count(char ***list)
 {
 	int	i;

@@ -34,22 +34,6 @@ void	free_double(char **ptr)
 	free(ptr);
 }
 
-int	check_duplicate(t_stack *pa, int data)
-{
-	int	front;
-
-	front = (pa->top + 1) % pa->size;
-	while (front != pa->bot)
-	{
-		if (pa->arr[front] == data)
-			return (0);
-		front = (front + 1) % pa->size;
-	}
-	if (pa->arr[front] == data)
-		return (0);
-	return (1);
-}
-
 void	free_triple(char ***list)
 {
 	int	i;

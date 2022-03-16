@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+
 #include <stdlib.h>
-#include "sort.h"
+#include "quick_sort.h"
 #include "util.h"
 #include "error.h"
 #include "stack.h"
-#include "push_swap.h"
+#include "radix_swap.h"
 
 static int	init_stacks(t_stack **pa, t_stack **pb, char ***list)
 {
@@ -90,6 +91,7 @@ int	main(int argc, char **argv)
 
 	if (argc == 1)
 		return (0);
+//	printf("ARG: %s\n", argv[1]);
 	list = get_args_list(argv + 1, argc - 1);
 	if (!init_stacks(&pa, &pb, list))
 		free_and_exit(pa, pb, list);
@@ -98,6 +100,6 @@ int	main(int argc, char **argv)
 	free_triple(list);
 	mapper = create_mapper(pa);
 	map_stack(pa, mapper);
-	push_swap(pa, pb);
+	radix_swap(pa, pb);
 	return (0);
 }
