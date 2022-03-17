@@ -17,6 +17,7 @@
 #include "util.h"
 #include "error.h"
 #include "stack.h"
+#include "small_swap.h"
 #include "radix_swap.h"
 
 static int	init_stacks(t_stack **pa, t_stack **pb, char ***list)
@@ -91,7 +92,6 @@ int	main(int argc, char **argv)
 
 	if (argc == 1)
 		return (0);
-//	printf("ARG: %s\n", argv[1]);
 	list = get_args_list(argv + 1, argc - 1);
 	if (!init_stacks(&pa, &pb, list))
 		free_and_exit(pa, pb, list);
@@ -100,6 +100,9 @@ int	main(int argc, char **argv)
 	free_triple(list);
 	mapper = create_mapper(pa);
 	map_stack(pa, mapper);
-	radix_swap(pa, pb);
+	if (pa->count <= 50)
+		small_swap(pa, pb);
+	else
+		radix_swap(pa, pb);
 	return (0);
 }
