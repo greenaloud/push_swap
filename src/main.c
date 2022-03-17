@@ -19,6 +19,25 @@
 #include "../include/small_swap.h"
 #include "../include/radix_swap.h"
 
+static int	check_sorted(t_stack *pa)
+{
+	int	i;
+	int	idx;
+	int	loop;
+
+	idx = (pa->top + 1) % pa->size;
+	loop = pa->count -1;
+	i = 0;
+	while (i < loop)
+	{
+		if (pa->arr[idx] > pa->arr[(idx + 1) % pa->size])
+			return (0);
+		idx = (idx + 1) % pa->size;
+		i++;
+	}
+	return (1);
+}
+
 static int	init_stacks(t_stack **pa, t_stack **pb, char ***list)
 {
 	int	count;
@@ -46,6 +65,11 @@ int	main(int argc, char **argv)
 		free_and_exit(pa, pb, list);
 	free_triple(list);
 	simplify(pa);
+	if (check_sorted(pa))
+	{
+		free_stacks(pa, pb);
+		return (0);
+	}
 	if (pa->count <= 50)
 		small_swap(pa, pb);
 	else
