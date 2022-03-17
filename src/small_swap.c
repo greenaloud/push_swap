@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "command.h"
-#include "small_swap.h"
+#include "../include/command.h"
+#include "../include/small_swap.h"
 
 int	get_min_index(t_stack *pa)
 {

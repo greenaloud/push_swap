@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
-#include "command.h"
-#include "radix_swap.h"
+#include "../include/command.h"
+#include "../include/radix_swap.h"
 
 static int	get_compare_count(int size)
 {

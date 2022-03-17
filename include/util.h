@@ -19,9 +19,7 @@
 # define INT_MAX	2147483647
 
 int		get_arg_count(char ***list);
-int		check_duplicate(t_stack *pa, int data);
 int		check_and_push(t_stack *pa, char ***list);
 char	***get_args_list(char **argv, int size);
-int		atoi_with_check(char *str, int *flag);
 
 #endif

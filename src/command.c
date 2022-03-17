@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "command.h"
+#include "../include/command.h"
 
 static void	p(t_stack *pa, t_stack *pb, int flag)
 {

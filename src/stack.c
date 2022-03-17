@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
 #include <stdlib.h>
+#include "../include/stack.h"
 
 t_stack	*create_stack(int size)
 {

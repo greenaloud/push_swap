@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "quick_sort.h"
+#include "../include/quick_sort.h"
 
 static void	swap(int *a, int *b)
 {

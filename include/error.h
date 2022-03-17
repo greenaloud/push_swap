@@ -16,8 +16,6 @@
 # include "stack.h"
 
 void	error_exit(void);
-void	free_double(char **ptr);
-void	free_triple(char ***list);
 void	free_and_exit(t_stack *pa, t_stack *pb, char ***list);
 
 #endif

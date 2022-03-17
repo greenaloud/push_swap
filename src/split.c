@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "split.h"
 #include <stdlib.h>
+#include "../include/split.h"
 
 static int	get_count(char const *s, char c)
 {
