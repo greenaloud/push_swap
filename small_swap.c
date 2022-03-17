@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   small_swap.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wocho <wocho@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/17 13:53:38 by wocho             #+#    #+#             */
+/*   Updated: 2022/03/17 13:53:40 by wocho            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "command.h"
 #include "small_swap.h"
 
 int	get_min_index(t_stack *pa)
 {
-	int i;
-	int idx;
-	int min;
-	int min_idx;
+	int	i;
+	int	idx;
+	int	min;
+	int	min_idx;
 
 	idx = (pa->top + 2) % pa->size;
 	i = 1;
@@ -27,10 +39,10 @@ int	get_min_index(t_stack *pa)
 
 int	get_max_index(t_stack *pa)
 {
-	int i;
-	int idx;
-	int max;
-	int max_idx;
+	int	i;
+	int	idx;
+	int	max;
+	int	max_idx;
 
 	idx = (pa->top + 2) % pa->size;
 	i = 1;
@@ -51,8 +63,8 @@ int	get_max_index(t_stack *pa)
 
 void	swap_three(t_stack *pa, t_stack *pb)
 {
-	int min;
-	int max;
+	int	min;
+	int	max;
 
 	min = get_min_index(pa);
 	max = get_max_index(pa);
@@ -76,7 +88,7 @@ void	swap_three(t_stack *pa, t_stack *pb)
 
 void	small_swap(t_stack *pa, t_stack *pb)
 {
-	int min;
+	int	min;
 
 	while (pa->count > 3)
 	{

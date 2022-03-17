@@ -6,11 +6,9 @@
 /*   By: wocho <wocho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 18:49:03 by wocho             #+#    #+#             */
-/*   Updated: 2022/02/22 20:17:34 by wocho            ###   ########.fr       */
+/*   Updated: 2022/03/17 13:52:36 by wocho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #include <stdlib.h>
 #include "quick_sort.h"
